@@ -26,12 +26,13 @@ const PORT = process.env.PORT || 4000;
 console.log("Server is running on port:", PORT);
 
 // Connecting to database
+
+
 database.connect();
 
 // Connecting to cloudinary
-cloudinaryConnect().catch((error) => {
-	console.error("Cloudinary connection failed:", error);
-});
+
+cloudinaryConnect();
 
 // Middlewares
 app.use(express.json()); // For parsing JSON requests
@@ -71,22 +72,6 @@ app.get("/", (req, res) => {
 	});
 });
 
-// Catch-all route for undefined routes (404 handler)
-app.use((req, res, next) => {
-	res.status(404).json({
-		success: false,
-		message: "Route not found",
-	});
-});
-
-// Error handling middleware (optional, for catching internal errors)
-app.use((err, req, res, next) => {
-	console.error("Internal server error:", err);
-	res.status(500).json({
-		success: false,
-		message: "Internal server error",
-	});
-});
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
