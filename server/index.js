@@ -35,6 +35,11 @@ app.use(
 		credentials: true,
 	})
 );
+
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.use(
 	fileUpload({
 		useTempFiles: true,
@@ -64,5 +69,14 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
 	console.log(`App is listening at ${PORT}`);
 });
+
+
+app.use((req, res, next) => {
+
+	res.status(404).send("Not Found");
+	
+});
+
+
 
 // End of code.
