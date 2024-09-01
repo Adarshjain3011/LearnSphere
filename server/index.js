@@ -41,7 +41,7 @@ app.use(cookieParser()); // For handling cookies
 // CORS middleware to allow requests from your frontend on Vercel
 app.use(
 	cors({
-		origin: "https://learn-sphere-5af4-git-main-adarshs-projects-f27ee43e.vercel.app", // Update to your actual frontend URL
+		origin:"*", // Update to your actual frontend URL
 		credentials: true, // To support cookies and credentials across origins
 	})
 );
@@ -75,7 +75,11 @@ app.get("/", (req, res) => {
 
 // Start the server and listen on the specified port
 app.listen(PORT, () => {
+
 	console.log(`App is listening on port ${PORT}`);
+
+	
 });
+
 
 
