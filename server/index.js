@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
-		origin: "*",
+		origin: "https://learn-sphere-5af4-git-main-adarshs-projects-f27ee43e.vercel.app/",
 		credentials: true,
 	})
 );
@@ -74,7 +74,7 @@ app.listen(PORT, () => {
 app.use((req, res, next) => {
 
 	res.status(404).send("Not Found");
-	
+
 });
 
 
