@@ -15,7 +15,7 @@ router.post("/verifyPayment", auth, isStudent, verifyPayment);
 router.post("/sendPaymentSuccessEmail", auth, isStudent, sendPaymentSuccessEmail);
 
 // Webhook route for Razorpay
-router.post("/razorpay-webhook", webhookHandler); // Add the webhook route
+router.post("/razorpay-webhook", express.raw({ type: "application/json" }), webhookHandler); // Add raw body parsing
 
 module.exports = router;
 
