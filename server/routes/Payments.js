@@ -1,21 +1,22 @@
 // Import the required modules
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const {
   capturePayment,
-  // verifySignature,
   verifyPayment,
   sendPaymentSuccessEmail,
-} = require("../controllers/payments")
-const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth")
-router.post("/capturePayment", auth, isStudent, capturePayment)
-router.post("/verifyPayment", auth, isStudent, verifyPayment)
-router.post(
-  "/sendPaymentSuccessEmail",
-  auth,
-  isStudent,
-  sendPaymentSuccessEmail
-)
-// router.post("/verifySignature", verifySignature)
+  webhookHandler, // Add the webhook handler
+} = require("../controllers/payments");
+const { auth, isInstructor, isStudent, isAdmin } = require("../middleware/auth");
 
-module.exports = router
+// Payment routes
+router.post("/capturePayment", auth, isStudent, capturePayment);
+router.post("/verifyPayment", auth, isStudent, verifyPayment);
+router.post("/sendPaymentSuccessEmail", auth, isStudent, sendPaymentSuccessEmail);
+
+// Webhook route for Razorpay
+router.post("/razorpay-webhook", webhookHandler); // Add the webhook route
+
+module.exports = router;
+
+
